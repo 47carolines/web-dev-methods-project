@@ -1,5 +1,5 @@
 node_modules/
 .env
 .DS_Store
-backend/tmp/
-backend/log/
+backend/insurance_api/tmp/
+backend/insurance_api/log/
