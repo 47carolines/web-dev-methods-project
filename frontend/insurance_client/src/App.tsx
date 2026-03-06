@@ -1,12 +1,12 @@
-import './App.css'
-import Login from './pages/Login'
+import { Outlet } from "react-router-dom";
+import MainLayout from "./components/layout/MainLayout";
 
 function App() {
   return (
-    <>
-        <Login/>
-    </>
-  )
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
+  );
 }
 
-export default App
+export default App;
