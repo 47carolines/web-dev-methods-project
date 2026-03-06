@@ -1,18 +1,11 @@
 import './App.css'
+import Login from './pages/Login'
 
 function App() {
   return (
     <>
-        <h2>Login</h2>
-
-      <input placeholder="Email" />
-      <br />
-
-      <input type="password" placeholder="Password" />
-      <br />
-
-      <button>Login</button>
-      </>
+        <Login/>
+    </>
   )
 }
 
