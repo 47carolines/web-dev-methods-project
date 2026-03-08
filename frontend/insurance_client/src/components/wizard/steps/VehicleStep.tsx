@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-
+import type { VehicleData } from "../../../types/vehicle";
 interface Props {
-  data: any;
-  updateData: (data: any) => void;
+  data: VehicleData;
+  updateData: (data: VehicleData) => void;
   nextStep: () => void;
   prevStep: () => void;
 }

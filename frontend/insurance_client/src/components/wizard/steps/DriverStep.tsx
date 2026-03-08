@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import type { DriverData } from "../../../types/driver";
 
 interface Props {
-  data: any;
-  updateData: (data: any) => void;
+  data: DriverData;
+  updateData: (data: DriverData) => void;
   nextStep: () => void;
   prevStep: () => void;
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-
+import type { PersonalData } from "../../../types/personal";
 interface Props {
-  data: any;
-  updateData: (data: any) => void;
+  data: PersonalData;
+  updateData: (data: PersonalData) => void;
   nextStep: () => void;
   prevStep: () => void;
 }

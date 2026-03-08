@@ -19,9 +19,9 @@ export default function QuoteWizard() {
   const [step, setStep] = useState(0);
 
   const [formData, setFormData] = useState({
-    personal: {},
-    vehicle: {},
-    driver: {},
+    personal: { fullName: "", dob: "", email: "" },
+    vehicle: { make: "", model: "", year: "" },
+    driver: { age: "", licenseYears: "" },
     final: {},
   });
 

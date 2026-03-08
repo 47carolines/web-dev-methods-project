@@ -1,6 +1,8 @@
+import type { FinalDetailsData } from "../../../types/final";
+
 interface Props {
-  data: any;
-  updateData: (data: any) => void;
+  data: FinalDetailsData;
+  updateData: (data: FinalDetailsData) => void;
   nextStep: () => void;
   prevStep: () => void;
 }
