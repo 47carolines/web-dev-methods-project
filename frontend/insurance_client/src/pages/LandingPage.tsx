@@ -6,7 +6,7 @@ export default function LandingPage() {
   const [zip, setZip] = useState("");
 
   function startQuote() {
-    navigate("/quote-form");
+    navigate("/quote");
   }
 
   return (

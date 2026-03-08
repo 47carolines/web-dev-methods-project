@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
-import QuoteForm from './pages/QuoteForm'
 import QuoteResult from './pages/QuoteResult'
 import LandingPage from './pages/LandingPage'
+import QuoteWizard from './components/wizard/QuoteWizard.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<LandingPage />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="quote-form" element={<QuoteForm />} />
+          <Route path="quote" element={<QuoteWizard />} />
           <Route path="quote-result" element={<QuoteResult />} />
         </Route>
       </Routes>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import StepProgressBar from "./StepProgressBar";
 
-import StartStep from "./steps/StartStep";
 import PersonalInfoStep from "./steps/PersonalInfoStep";
 import VehicleStep from "./steps/VehicleStep";
 import DriverStep from "./steps/DriverStep";
@@ -10,7 +9,6 @@ import RateResultStep from "./steps/RateResultStep";
 
 export default function QuoteWizard() {
   const steps = [
-    "Start",
     "Personal",
     "Vehicles",
     "Drivers",
@@ -42,52 +40,60 @@ export default function QuoteWizard() {
     setStep((s) => Math.max(s - 1, 0));
   }
 
-  function renderStep() {
-    switch (step) {
-      case 0:
-        return <StartStep nextStep={nextStep} />;
-      case 1:
-        return (
-          <PersonalInfoStep
-            data={formData.personal}
-            updateData={(d) => updateData("personal", d)}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
-        );
-      case 2:
-        return (
-          <VehicleStep
-            data={formData.vehicle}
-            updateData={(d) => updateData("vehicle", d)}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
-        );
-      case 3:
-        return (
-          <DriverStep
-            data={formData.driver}
-            updateData={(d) => updateData("driver", d)}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
-        );
-      case 4:
-        return (
-          <FinalDetailsStep
-            data={formData.final}
-            updateData={(d) => updateData("final", d)}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
-        );
-      case 5:
-        return <RateResultStep formData={formData} />;
-      default:
-        return null;
-    }
+function renderStep() {
+  switch (step) {
+    case 0:
+      return (
+        <PersonalInfoStep
+          data={formData.personal}
+          updateData={(d) => updateData("personal", d)}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+
+    case 1:
+      return (
+        <VehicleStep
+          data={formData.vehicle}
+          updateData={(d) => updateData("vehicle", d)}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+
+    case 2:
+      return (
+        <DriverStep
+          data={formData.driver}
+          updateData={(d) => updateData("driver", d)}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+
+    case 3:
+      return (
+        <FinalDetailsStep
+          data={formData.final}
+          updateData={(d) => updateData("final", d)}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+
+    case 4:
+      return (
+        <RateResultStep
+          formData={formData}
+          prevStep={prevStep}
+        />
+      );
+
+    default:
+      return null;
   }
+}
 
   return (
     <div>
