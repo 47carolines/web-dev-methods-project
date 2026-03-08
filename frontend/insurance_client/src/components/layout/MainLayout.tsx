@@ -1,20 +1,17 @@
-import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
-interface Props {
-  children: ReactNode;
-}
+import { Link, Outlet } from "react-router-dom";
 
-export default function MainLayout({ children }: Props) {
+export default function MainLayout() {
   return (
     <div>
-
-      <header style={{
-        padding: "15px 40px",
-        background: "#1e40af",
-        color: "white",
-        display: "flex",
-        justifyContent: "space-between"
-      }}>
+      <header
+        style={{
+          padding: "15px 40px",
+          background: "#1e40af",
+          color: "white",
+          display: "flex",
+          justifyContent: "space-between"
+        }}
+      >
         <div>Insurance Simulation Project</div>
 
         <nav style={{ display: "flex", gap: "20px" }}>
@@ -25,9 +22,8 @@ export default function MainLayout({ children }: Props) {
       </header>
 
       <main>
-        {children}
+        <Outlet />
       </main>
-
     </div>
   );
 }

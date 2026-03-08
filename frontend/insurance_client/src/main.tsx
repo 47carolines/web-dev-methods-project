@@ -10,19 +10,22 @@ import Register from './pages/Register'
 import QuoteResult from './pages/QuoteResult'
 import LandingPage from './pages/LandingPage'
 import QuoteWizard from './components/wizard/QuoteWizard.tsx'
+import MainLayout from './components/layout/MainLayout.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
+  <BrowserRouter>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route element={<App />}>
           <Route index element={<LandingPage />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="quote" element={<QuoteWizard />} />
+          <Route path="quote/:step" element={<QuoteWizard />} />
           <Route path="quote-result" element={<QuoteResult />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+      </Route>
+    </Routes>
+  </BrowserRouter>
   </StrictMode>
 )
