@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StepProgressBar from "./StepProgressBar";
 
@@ -10,18 +10,17 @@ import RateResultStep from "./steps/RateResultStep";
 
 import type { WizardFormData } from "../../types/wizard";
 
-const STEP_KEYS = ["personal", "vehicles", "drivers", "final", "rates"];
-const STEP_LABELS = ["Personal", "Vehicles", "Drivers", "Final", "Rates"];
-
 export default function QuoteWizard() {
-  const navigate = useNavigate();
-  const { step: stepParam } = useParams<{ step: string }>();
+  const stepKeys = ["personal", "vehicles", "drivers", "final", "rates"] as const;
+  type StepKey = (typeof stepKeys)[number]; // "personal" | "vehicles" | ...
 
-  const step = useMemo(() => {
-    if (!stepParam) return 0;
-    const idx = STEP_KEYS.indexOf(stepParam.toLowerCase());
-    return idx >= 0 ? idx : 0;
-  }, [stepParam]);
+  const { step: stepParam } = useParams<{ step: string }>();
+  const navigate = useNavigate();
+
+  // Initialize step from URL, default to 0
+  const initialStep = stepParam ? stepKeys.indexOf(stepParam.toLowerCase() as StepKey) : 0;
+
+  const [step, setStep] = useState(initialStep >= 0 ? initialStep : 0);
 
   const [formData, setFormData] = useState<WizardFormData>({
     personal: { fullName: "", dob: "", email: "" },
@@ -30,25 +29,24 @@ export default function QuoteWizard() {
     final: {},
   });
 
-  const goToStep = useCallback(
-    (index: number) => {
-      navigate(`/quote/${STEP_KEYS[index]}`);
-    },
-    [navigate]
-  );
+  // Memoized setter to avoid unnecessary re-renders
+  const updateData = useCallback(<K extends keyof WizardFormData>(
+    section: K,
+    data: WizardFormData[K]
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [section]: data,
+    }));
+  }, []);
 
-  const nextStep = () => goToStep(Math.min(step + 1, STEP_KEYS.length - 1));
+  const goToStep = (index: number) => {
+    setStep(index);
+    navigate(`/quote/${stepKeys[index]}`);
+  };
+
+  const nextStep = () => goToStep(Math.min(step + 1, stepKeys.length - 1));
   const prevStep = () => goToStep(Math.max(step - 1, 0));
-
-  const updateData = useCallback(
-    <K extends keyof WizardFormData>(section: K, data: WizardFormData[K]) => {
-      setFormData((prev) => ({
-        ...prev,
-        [section]: data,
-      }));
-    },
-    []
-  );
 
   function renderStep() {
     switch (step) {
@@ -106,10 +104,7 @@ export default function QuoteWizard() {
 
   return (
     <div>
-      <StepProgressBar
-        steps={STEP_LABELS}
-        currentStep={step}
-      />
+      <StepProgressBar steps={[...stepKeys]} currentStep={step} />
 
       <div style={{ padding: "20px 40px" }}>
         {renderStep()}

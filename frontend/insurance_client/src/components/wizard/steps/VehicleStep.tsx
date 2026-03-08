@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { VehicleData } from "../../../types/vehicle";
 
 interface Props {
@@ -18,13 +18,10 @@ export default function VehicleStep({
   const [model, setModel] = useState(data.model);
   const [year, setYear] = useState(data.year);
 
-  useEffect(() => {
-    updateData({
-      make,
-      model,
-      year,
-    });
-  }, [make, model, year, updateData]);
+  const handleNext = () => {
+    updateData({ make, model, year });
+    nextStep();
+  };
 
   return (
     <div style={{ maxWidth: "500px" }}>
@@ -50,7 +47,7 @@ export default function VehicleStep({
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={prevStep}>Back</button>
-        <button onClick={nextStep}>Next</button>
+        <button onClick={handleNext}>Next</button>
       </div>
     </div>
   );

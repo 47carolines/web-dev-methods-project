@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { PersonalData } from "../../../types/personal";
 
 interface Props {
@@ -18,13 +18,10 @@ export default function PersonalInfoStep({
   const [dob, setDob] = useState(data.dob);
   const [email, setEmail] = useState(data.email);
 
-  useEffect(() => {
-    updateData({
-      fullName,
-      dob,
-      email,
-    });
-  }, [fullName, dob, email, updateData]);
+  const handleNext = () => {
+    updateData({ fullName, dob, email });
+    nextStep();
+  };
 
   return (
     <div style={{ maxWidth: "500px" }}>
@@ -51,7 +48,7 @@ export default function PersonalInfoStep({
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={prevStep}>Back</button>
-        <button onClick={nextStep}>Next</button>
+        <button onClick={handleNext}>Next</button>
       </div>
     </div>
   );

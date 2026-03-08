@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { DriverData } from "../../../types/driver";
 
 interface Props {
@@ -17,12 +17,11 @@ export default function DriverStep({
   const [age, setAge] = useState(data.age);
   const [licenseYears, setLicenseYears] = useState(data.licenseYears);
 
-  useEffect(() => {
-    updateData({
-      age,
-      licenseYears,
-    });
-  }, [age, licenseYears, updateData]);
+  const handleNext = () => {
+    updateData({ age, licenseYears });
+    nextStep();
+  };
+
 
   return (
     <div style={{ maxWidth: "500px" }}>
@@ -42,7 +41,7 @@ export default function DriverStep({
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={prevStep}>Back</button>
-        <button onClick={nextStep}>Next</button>
+        <button onClick={handleNext}>Next</button>
       </div>
     </div>
   );
