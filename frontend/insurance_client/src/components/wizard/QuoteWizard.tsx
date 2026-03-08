@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import StepProgressBar from "./StepProgressBar";
 
 import PersonalInfoStep from "./steps/PersonalInfoStep";
@@ -6,6 +6,8 @@ import VehicleStep from "./steps/VehicleStep";
 import DriverStep from "./steps/DriverStep";
 import FinalDetailsStep from "./steps/FinalDetailsStep";
 import RateResultStep from "./steps/RateResultStep";
+
+import type { WizardFormData } from "../../types/wizard";
 
 export default function QuoteWizard() {
   const steps = [
@@ -18,19 +20,22 @@ export default function QuoteWizard() {
 
   const [step, setStep] = useState(0);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<WizardFormData>({
     personal: { fullName: "", dob: "", email: "" },
     vehicle: { make: "", model: "", year: "" },
     driver: { age: "", licenseYears: "" },
     final: {},
   });
 
-  function updateData(section: string, data: any) {
-    setFormData((prev) => ({
-      ...prev,
-      [section]: data,
-    }));
-  }
+const updateData = useCallback(<K extends keyof WizardFormData>(
+  section: K,
+  data: WizardFormData[K]
+) => {
+  setFormData((prev) => ({
+    ...prev,
+    [section]: data,
+  }));
+}, []);
 
   function nextStep() {
     setStep((s) => Math.min(s + 1, steps.length - 1));
@@ -76,7 +81,6 @@ function renderStep() {
       return (
         <FinalDetailsStep
           data={formData.final}
-          updateData={(d) => updateData("final", d)}
           nextStep={nextStep}
           prevStep={prevStep}
         />

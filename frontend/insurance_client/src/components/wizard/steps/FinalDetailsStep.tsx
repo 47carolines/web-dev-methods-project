@@ -2,12 +2,11 @@ import type { FinalDetailsData } from "../../../types/final";
 
 interface Props {
   data: FinalDetailsData;
-  updateData: (data: FinalDetailsData) => void;
   nextStep: () => void;
   prevStep: () => void;
 }
 
-export default function FinalDetailsStep({ data, updateData, nextStep, prevStep }: Props) {
+export default function FinalDetailsStep({ data, nextStep, prevStep }: Props) {
   // Optional: you can add checkboxes, confirmation fields, or summary here
   return (
     <div style={{ maxWidth: "500px" }}>
