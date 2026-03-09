@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import type { WizardFormData } from "../../../types/wizard";
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface Props {
   formData: WizardFormData;
@@ -25,7 +26,7 @@ export default function RateResultStep({ formData, prevStep }: Props) {
   useEffect(() => {
     async function fetchQuote() {
       try {
-        const response = await fetch("/api/quote/calculate", {
+        const response = await fetch(`${API_URL}/api/quote/calculate`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
