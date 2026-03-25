@@ -27,12 +27,14 @@ export default function DriverStep({
     <div style={{ maxWidth: "500px" }}>
       <h2>Driver Information</h2>
 
+      <br/><br/><label>Age</label><br />
       <input
         placeholder="Age"
         value={age}
         onChange={(e) => setAge(e.target.value)}
       />
 
+      <br/><br/><label>Years Licensed</label><br />
       <input
         placeholder="Years Licensed"
         value={licenseYears}

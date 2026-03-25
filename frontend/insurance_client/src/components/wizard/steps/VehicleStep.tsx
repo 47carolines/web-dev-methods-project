@@ -26,19 +26,21 @@ export default function VehicleStep({
   return (
     <div style={{ maxWidth: "500px" }}>
       <h2>Vehicle Information</h2>
-
+      <br/><br/><label>Make</label><br />
       <input
         placeholder="Make"
         value={make}
         onChange={(e) => setMake(e.target.value)}
       />
 
+      <br/><br/><label>Model</label><br />
       <input
         placeholder="Model"
         value={model}
         onChange={(e) => setModel(e.target.value)}
       />
 
+      <br/><br/><label>Year</label><br />
       <input
         placeholder="Year"
         value={year}

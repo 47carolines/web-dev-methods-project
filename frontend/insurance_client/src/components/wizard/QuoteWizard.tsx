@@ -23,9 +23,20 @@ export default function QuoteWizard() {
   const [step, setStep] = useState(initialStep >= 0 ? initialStep : 0);
 
   const [formData, setFormData] = useState<WizardFormData>({
-    personal: { fullName: "", dob: "", email: "" },
-    vehicle: { make: "", model: "", year: "" },
-    driver: { age: "", licenseYears: "" },
+    personal: {
+      fullName: "John Doe",
+      dob: "1995-06-15",
+      email: "john.doe@email.com",
+    },
+    vehicle: {
+      make: "Toyota",
+      model: "Camry",
+      year: "2020",
+    },
+    driver: {
+      age: "30",
+      licenseYears: "12",
+    },
     final: {},
   });
 

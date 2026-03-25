@@ -26,19 +26,19 @@ export default function PersonalInfoStep({
   return (
     <div style={{ maxWidth: "500px" }}>
       <h2>Let's talk about you!</h2>
-
+      <label>Full Name</label><br />
       <input
         placeholder="Full Name"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
       />
-
+      <br/><br/><label>Date of Birth</label><br />
       <input
         type="date"
         value={dob}
         onChange={(e) => setDob(e.target.value)}
       />
-
+      <br/><br/><label>Email</label><br />
       <input
         type="email"
         placeholder="email@example.com"

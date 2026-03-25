@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
-import QuoteResult from './pages/QuoteResult'
 import LandingPage from './pages/LandingPage'
 import QuoteWizard from './components/wizard/QuoteWizard.tsx'
 import MainLayout from './components/layout/MainLayout.tsx'
@@ -22,7 +21,6 @@ createRoot(document.getElementById('root')!).render(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="quote/:step" element={<QuoteWizard />} />
-          <Route path="quote-result" element={<QuoteResult />} />
         </Route>
       </Route>
     </Routes>

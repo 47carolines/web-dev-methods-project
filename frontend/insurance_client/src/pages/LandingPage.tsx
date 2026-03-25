@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  const [zip, setZip] = useState("");
+  const [zip, setZip] = useState("65201");
 
   function startQuote() {
     navigate("/quote/personal");
