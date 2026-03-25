@@ -59,8 +59,7 @@ export default function PersonalInfoStep({
         />
       </label>
 
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={prevStep}>Back</button>
+      <div style={{ marginTop: "30px", display: "flex", gap: "15px" }}>
         <button onClick={handleNext}>Next</button>
       </div>
     </div>

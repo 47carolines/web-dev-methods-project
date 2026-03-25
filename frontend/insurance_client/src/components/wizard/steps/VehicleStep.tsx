@@ -57,7 +57,7 @@ export default function VehicleStep({
         />
       </label>
 
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ marginTop: "30px", display: "flex", gap: "15px" }}>
         <button onClick={prevStep}>Back</button>
         <button onClick={handleNext}>Next</button>
       </div>
