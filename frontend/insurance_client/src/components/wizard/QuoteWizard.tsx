@@ -37,7 +37,11 @@ export default function QuoteWizard() {
       age: "30",
       licenseYears: "12",
     },
-    final: {},
+    final: {
+      agreeTerms: false,
+      coverageType: "",
+      notes: "",
+    },
   });
 
   // Memoized setter to avoid unnecessary re-renders
@@ -94,7 +98,7 @@ export default function QuoteWizard() {
       case 3:
         return (
           <FinalDetailsStep
-            data={formData.final}
+            formData={formData}
             nextStep={nextStep}
             prevStep={prevStep}
           />

@@ -11,7 +11,6 @@ export default function PersonalInfoStep({
   data,
   updateData,
   nextStep,
-  prevStep,
 }: Props) {
   const [fullName, setFullName] = useState(data.fullName);
   const [dob, setDob] = useState(data.dob);
