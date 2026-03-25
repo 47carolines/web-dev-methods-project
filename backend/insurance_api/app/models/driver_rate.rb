@@ -1,0 +1,2 @@
+class DriverRate < ApplicationRecord
+end

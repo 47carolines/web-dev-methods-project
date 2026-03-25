@@ -1,0 +1,2 @@
+class VehicleRate < ApplicationRecord
+end

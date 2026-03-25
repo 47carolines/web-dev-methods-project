@@ -8,7 +8,7 @@ Web Development Methods Project required for Graduate students in the CS 7830 We
 -	`cd backend/insurance_api`
 -	`rails server`
 -   http://localhost:3000/
-### MySQL start up:
+### MySQL (Homebrew) start up:
 -	`brew services start mysql`
 -	`brew services list`
 -	`brew services stop`
