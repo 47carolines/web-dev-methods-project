@@ -39,8 +39,7 @@ export default function QuoteWizard() {
     },
     final: {
       agreeTerms: false,
-      coverageType: "",
-      notes: "",
+      coverageType: "Personal Auto",    
     },
   });
 
@@ -101,6 +100,7 @@ export default function QuoteWizard() {
             formData={formData}
             nextStep={nextStep}
             prevStep={prevStep}
+            updateData={(d) => updateData("final", d)}
           />
         );
 
