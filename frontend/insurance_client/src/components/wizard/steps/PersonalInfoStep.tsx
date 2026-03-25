@@ -7,7 +7,6 @@ interface Props {
   nextStep: () => void;
   prevStep: () => void;
 }
-
 export default function PersonalInfoStep({
   data,
   updateData,
@@ -26,25 +25,39 @@ export default function PersonalInfoStep({
   return (
     <div style={{ maxWidth: "500px" }}>
       <h2>Let's talk about you!</h2>
-      <label>Full Name</label><br />
-      <input
-        placeholder="Full Name"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-      />
-      <br/><br/><label>Date of Birth</label><br />
-      <input
-        type="date"
-        value={dob}
-        onChange={(e) => setDob(e.target.value)}
-      />
-      <br/><br/><label>Email</label><br />
-      <input
-        type="email"
-        placeholder="email@example.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Full Name
+        <input
+          name="fullName"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
+
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Date of Birth
+        <input
+          name="dob"
+          type="date"
+          value={dob}
+          onChange={(e) => setDob(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
+
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Email
+        <input
+          name="email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={prevStep}>Back</button>

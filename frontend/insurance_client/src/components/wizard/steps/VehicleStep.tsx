@@ -26,26 +26,36 @@ export default function VehicleStep({
   return (
     <div style={{ maxWidth: "500px" }}>
       <h2>Vehicle Information</h2>
-      <br/><br/><label>Make</label><br />
-      <input
-        placeholder="Make"
-        value={make}
-        onChange={(e) => setMake(e.target.value)}
-      />
 
-      <br/><br/><label>Model</label><br />
-      <input
-        placeholder="Model"
-        value={model}
-        onChange={(e) => setModel(e.target.value)}
-      />
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Make
+        <input
+          name="make"
+          value={make}
+          onChange={(e) => setMake(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
 
-      <br/><br/><label>Year</label><br />
-      <input
-        placeholder="Year"
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-      />
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Model
+        <input
+          name="model"
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
+
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Year
+        <input
+          name="year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={prevStep}>Back</button>

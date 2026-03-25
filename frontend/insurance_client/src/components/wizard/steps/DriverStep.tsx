@@ -22,24 +22,29 @@ export default function DriverStep({
     nextStep();
   };
 
-
   return (
     <div style={{ maxWidth: "500px" }}>
       <h2>Driver Information</h2>
 
-      <br/><br/><label>Age</label><br />
-      <input
-        placeholder="Age"
-        value={age}
-        onChange={(e) => setAge(e.target.value)}
-      />
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Age
+        <input
+          name="age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
 
-      <br/><br/><label>Years Licensed</label><br />
-      <input
-        placeholder="Years Licensed"
-        value={licenseYears}
-        onChange={(e) => setLicenseYears(e.target.value)}
-      />
+      <label style={{ display: "block", marginBottom: "12px" }}>
+        Years Licensed
+        <input
+          name="licenseYears"
+          value={licenseYears}
+          onChange={(e) => setLicenseYears(e.target.value)}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </label>
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={prevStep}>Back</button>
