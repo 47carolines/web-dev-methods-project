@@ -7,9 +7,15 @@ interface Props {
   prevStep: () => void;
 }
 
+interface CoverageBreakdown {
+  coverage: string;
+  amount: number;
+}
+
 interface QuoteResponse {
-  premium: number;
-  riskLevel: string;
+  premium_total: number;
+  risk_level: string;
+  breakdown: CoverageBreakdown[];
 }
 
 export default function RateResultStep({ formData, prevStep }: Props) {
@@ -53,11 +59,22 @@ export default function RateResultStep({ formData, prevStep }: Props) {
       {loading && <p>Calculating...</p>}
 
       {quote && (
-        <p>
-          Estimated Premium: ${quote.premium.toFixed(2)}
-          <br />
-          Risk Level: {quote.riskLevel}
-        </p>
+        <div>
+          <p>
+            Estimated Premium: ${quote.premium_total?.toFixed(2) ?? "0.00"}
+            <br />
+            Risk Level: {quote.risk_level ?? "Unknown"}
+          </p>
+
+          <h3>Breakdown by Coverage</h3>
+          <ul>
+            {quote.breakdown.map((item) => (
+              <li key={item.coverage}>
+                {item.coverage}: ${item.amount.toFixed(2)}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
       <button onClick={prevStep}>Back</button>

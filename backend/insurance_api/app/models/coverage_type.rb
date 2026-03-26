@@ -1,0 +1,2 @@
+class CoverageType < ApplicationRecord
+end

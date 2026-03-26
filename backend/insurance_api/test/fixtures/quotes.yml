@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  personal_data: 
+  vehicle_data: 
+  driver_data: 
+  premium_total: 9.99
+  risk_level: MyString
+
+two:
+  personal_data: 
+  vehicle_data: 
+  driver_data: 
+  premium_total: 9.99
+  risk_level: MyString

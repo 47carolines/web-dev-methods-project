@@ -25,7 +25,7 @@ export default function QuoteWizard() {
   const [formData, setFormData] = useState<WizardFormData>({
     personal: {
       fullName: "John Doe",
-      dob: "1995-06-15",
+      dob: "1999-06-15",
       email: "john.doe@email.com",
     },
     vehicle: {
@@ -34,7 +34,7 @@ export default function QuoteWizard() {
       year: "2020",
     },
     driver: {
-      age: "30",
+      age: "26",
       licenseYears: "12",
     },
     final: {

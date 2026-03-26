@@ -1,35 +1,29 @@
-class Api::QuoteController < ApplicationController
-  skip_before_action :verify_authenticity_token  # for API requests
-
+# app/controllers/api/quote_controller.rb
+class Api::QuoteController < ActionController::API
   def calculate
-    # Receive frontend JSON
-    personal = params[:personal]
-    vehicle = params[:vehicle]
-    driver = params[:driver]
-
-    # Look up vehicle base premium
-    v = VehicleRate.find_by(
-      make: vehicle[:make],
-      model: vehicle[:model],
-      year: vehicle[:year].to_i
+    service = QuoteCalculatorService.new(
+      personal: params[:personal],
+      vehicle: params[:vehicle],
+      driver: params[:driver],
+      coverage_type_ids: params[:coverage_type_ids] || CoverageType.pluck(:id) # all if none selected
     )
-    base_premium = v ? v.base_premium : 200.0  # default if not found
 
-    # Look up driver risk factor
-    age = driver[:age].to_i
-    risk = DriverRate.where("min_age <= ? AND max_age >= ?", age, age).first
-    risk_factor = risk ? risk.risk_factor : 1.0
+    result = service.call
 
-    # Calculate final premium
-    premium = (base_premium * risk_factor).round(2)
+    # Optionally save quote
+    quote = Quote.create!(
+      personal_data: params[:personal],
+      vehicle_data: params[:vehicle],
+      driver_data: params[:driver],
+      premium_total: result[:premium_total],
+      risk_level: result[:risk_level]
+    )
 
-    # Determine risk level
-    risk_level = case risk_factor
-                 when 1.0..1.2 then "Low"
-                 when 1.21..1.4 then "Moderate"
-                 else "High"
-                 end
+    result[:breakdown].each do |b|
+      coverage = CoverageType.find_by(name: b[:coverage])
+      QuoteCoverage.create!(quote: quote, coverage_type: coverage, amount: b[:amount])
+    end
 
-    render json: { premium: premium, riskLevel: risk_level }
+    render json: result
   end
 end
