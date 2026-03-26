@@ -1,16 +1,17 @@
 # app/controllers/api/quote_controller.rb
 class Api::QuoteController < ActionController::API
   def calculate
+    # Just take all coverage types — user doesn’t choose
     service = QuoteCalculatorService.new(
       personal: params[:personal],
       vehicle: params[:vehicle],
       driver: params[:driver],
-      coverage_type_ids: params[:coverage_type_ids] || CoverageType.pluck(:id) # all if none selected
+      coverage_type_ids: CoverageType.pluck(:id) # all coverage types
     )
 
     result = service.call
 
-    # Optionally save quote
+    # Save quote
     quote = Quote.create!(
       personal_data: params[:personal],
       vehicle_data: params[:vehicle],

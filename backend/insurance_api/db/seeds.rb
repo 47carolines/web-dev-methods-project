@@ -9,9 +9,6 @@ DriverRate.create(min_age: 18, max_age: 25, risk_factor: 1.5)
 DriverRate.create(min_age: 26, max_age: 40, risk_factor: 1.2)
 DriverRate.create(min_age: 41, max_age: 65, risk_factor: 1.0)
 
-# Coverage types with base cost percentages
-CoverageType.delete_all
-
 CoverageType.create(name: "Liability", base_cost_percentage: 0.35)
 CoverageType.create(name: "Collision", base_cost_percentage: 0.45)
 CoverageType.create(name: "Comprehensive", base_cost_percentage: 0.20)

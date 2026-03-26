@@ -61,16 +61,16 @@ export default function RateResultStep({ formData, prevStep }: Props) {
       {quote && (
         <div>
           <p>
-            Estimated Premium: ${quote.premium_total?.toFixed(2) ?? "0.00"}
+            Estimated Premium: ${Number(quote.premium_total).toFixed(2)}
             <br />
-            Risk Level: {quote.risk_level ?? "Unknown"}
+            Risk Level: {quote.risk_level}
           </p>
 
-          <h3>Breakdown by Coverage</h3>
+          <h3>Coverage Breakdown:</h3>
           <ul>
-            {quote.breakdown.map((item) => (
-              <li key={item.coverage}>
-                {item.coverage}: ${item.amount.toFixed(2)}
+            {quote.breakdown.map((b, index) => (
+              <li key={index}>
+                {b.coverage}: ${Number(b.amount).toFixed(2)}
               </li>
             ))}
           </ul>
