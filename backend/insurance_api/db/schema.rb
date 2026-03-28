@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_26_013319) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_27_234547) do
   create_table "coverage_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.decimal "base_cost_percentage", precision: 5, scale: 2
     t.datetime "created_at", null: false
@@ -44,6 +44,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_26_013319) do
     t.string "risk_level"
     t.datetime "updated_at", null: false
     t.json "vehicle_data"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "updated_at", null: false
   end
 
   create_table "vehicle_rates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
