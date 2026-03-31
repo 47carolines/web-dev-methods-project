@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_27_234547) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_31_005420) do
   create_table "coverage_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.decimal "base_cost_percentage", precision: 5, scale: 2
     t.datetime "created_at", null: false
@@ -43,7 +43,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_27_234547) do
     t.decimal "premium_total", precision: 10
     t.string "risk_level"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.json "vehicle_data"
+    t.index ["user_id"], name: "index_quotes_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -64,4 +66,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_27_234547) do
 
   add_foreign_key "quote_coverages", "coverage_types"
   add_foreign_key "quote_coverages", "quotes"
+  add_foreign_key "quotes", "users"
 end

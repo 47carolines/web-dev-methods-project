@@ -1,3 +1,5 @@
 class Quote < ApplicationRecord
-    has_many :quote_coverages, dependent: :destroy
+  belongs_to :user
+
+  has_many :quote_coverages, dependent: :destroy
 end
