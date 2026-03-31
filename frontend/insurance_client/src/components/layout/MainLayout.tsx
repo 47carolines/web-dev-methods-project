@@ -1,6 +1,14 @@
 import { Link, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function MainLayout() {
+  const auth = useContext(AuthContext);
+
+  if (!auth) return null;
+
+  const { user, logout } = auth;
+
   return (
     <div>
       <header
@@ -9,21 +17,29 @@ export default function MainLayout() {
           background: "#1e40af",
           color: "white",
           display: "flex",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
         }}
       >
         <div>Insurance Simulation Project</div>
 
-        <nav style={{ display: "flex", gap: "20px" }}>
+        <nav style={{ display: "flex", gap: "20px", alignItems: "center" }}>
           <Link style={{ color: "white" }} to="/">Home</Link>
-          <Link style={{ color: "white" }} to="/login">Login</Link>
-          <Link style={{ color: "white" }} to="/register">Register</Link>
+
+          {!user ? (
+            <>
+              <Link style={{ color: "white" }} to="/login">Login</Link>
+              <Link style={{ color: "white" }} to="/register">Register</Link>
+            </>
+          ) : (
+            <>
+              <span>Welcome, {user.email}</span>
+              <button onClick={logout}>Logout</button>
+            </>
+          )}
         </nav>
       </header>
 
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   );
 }

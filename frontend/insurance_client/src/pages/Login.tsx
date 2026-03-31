@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  if (!auth) return null;
+
+  const { login } = auth;
 
   const handleLogin = async () => {
     setError("");
@@ -32,14 +41,14 @@ export default function Login() {
         return;
       }
 
-      // store user locally
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // 🔥 IMPORTANT CHANGE HERE
+      login(data.user);
 
       setSuccess("Login successful!");
       setEmail("");
       setPassword("");
 
-      console.log("Logged in user:", data.user);
+      navigate("/");
     } catch {
       setError("Network error");
     }
