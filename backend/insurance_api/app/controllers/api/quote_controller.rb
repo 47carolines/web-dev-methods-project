@@ -1,18 +1,21 @@
 # app/controllers/api/quote_controller.rb
 class Api::QuoteController < ActionController::API
   def calculate
+    user_id = params[:userId]
+
     # Just take all coverage types — user doesn’t choose
     service = QuoteCalculatorService.new(
       personal: params[:personal],
       vehicle: params[:vehicle],
       driver: params[:driver],
       coverage_type_ids: CoverageType.pluck(:id) # all coverage types
+      
     )
 
     result = service.call
 
     # Save quote
-    quote = Quote.create!(
+    quote = User.find(user_id).quotes.create!(
       personal_data: params[:personal],
       vehicle_data: params[:vehicle],
       driver_data: params[:driver],

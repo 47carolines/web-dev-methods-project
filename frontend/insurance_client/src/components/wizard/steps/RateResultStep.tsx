@@ -1,5 +1,6 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext, useRef } from "react";
 import type { WizardFormData } from "../../../types/wizard";
+import { AuthContext } from "../../../context/AuthContext";
 const API_URL = import.meta.env.VITE_API_URL;
 
 interface Props {
@@ -21,15 +22,23 @@ interface QuoteResponse {
 export default function RateResultStep({ formData, prevStep }: Props) {
   const [quote, setQuote] = useState<QuoteResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const hasFetched = useRef(false);
+
+  const auth = useContext(AuthContext);
+  const user = auth?.user;
 
   const payload = useMemo(
     () => ({
       ...formData,
+      userId: user?.id,
     }),
-    [formData]
+    [formData, user?.id]
   );
 
   useEffect(() => {
+    if (hasFetched.current) return; // 🚫 block second run (StrictMode)
+    hasFetched.current = true;      // ✅ mark as already called
+
     async function fetchQuote() {
       try {
         const response = await fetch(`${API_URL}/api/quote/calculate`, {

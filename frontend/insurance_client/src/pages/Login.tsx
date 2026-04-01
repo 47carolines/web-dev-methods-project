@@ -41,7 +41,6 @@ export default function Login() {
         return;
       }
 
-      // 🔥 IMPORTANT CHANGE HERE
       login(data.user);
 
       setSuccess("Login successful!");
