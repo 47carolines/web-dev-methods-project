@@ -30,4 +30,14 @@ class Api::QuoteController < ActionController::API
 
     render json: result
   end
+
+  def index
+    user = User.find(params[:userId])
+
+    quotes = user.quotes
+                  .order(created_at: :desc)
+                  .select(:id, :premium_total, :risk_level, :created_at)
+
+    render json: quotes
+  end
 end

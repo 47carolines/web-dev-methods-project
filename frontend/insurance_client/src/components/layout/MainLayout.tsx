@@ -32,6 +32,9 @@ export default function MainLayout() {
             </>
           ) : (
             <>
+            <Link style={{ color: "white" }} to="/submissions">
+              My Quotes
+            </Link>
               <span>Welcome, {user.email}</span>
               <button onClick={logout}>Logout</button>
             </>

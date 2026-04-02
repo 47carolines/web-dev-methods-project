@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     post "/register", to: "auth#register"
     post "/login", to: "auth#login"
     post "quote/calculate", to: "quote#calculate"
+    get "quotes", to: "quote#index"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

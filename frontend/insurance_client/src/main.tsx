@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import LandingPage from './pages/LandingPage';
 import QuoteWizard from './components/wizard/QuoteWizard.tsx';
 import MainLayout from './components/layout/MainLayout.tsx';
+import Submissions from './pages/Submissions.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="quote/:step" element={<QuoteWizard />} />
+            <Route path="submissions" element={<Submissions />} />
           </Route>
         </Routes>
       </App>
