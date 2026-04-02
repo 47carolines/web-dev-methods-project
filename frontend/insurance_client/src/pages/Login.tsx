@@ -2,13 +2,16 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const returnTo = location.state?.returnTo;
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -48,7 +51,7 @@ export default function Login() {
       setEmail("");
       setPassword("");
 
-      navigate("/");
+      navigate(returnTo || "/");
     } catch {
       setError("Network error");
     }

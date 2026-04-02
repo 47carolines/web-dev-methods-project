@@ -90,7 +90,7 @@ export default function FinalDetailsStep({ formData, updateData, nextStep, prevS
           }}>
             
     <button
-      onClick={() => navigate("/register")}
+      onClick={() => navigate("/register", { state: { returnTo: "/quote/rates" } })}
       style={{
         padding: "12px",
         borderRadius: "8px",
@@ -105,7 +105,7 @@ export default function FinalDetailsStep({ formData, updateData, nextStep, prevS
     </button>
 
     <button
-      onClick={() => navigate("/login")}
+      onClick={() => navigate("/login", { state: { returnTo: "/quote/rates" } })}
       style={{
         padding: "12px",
         borderRadius: "8px",

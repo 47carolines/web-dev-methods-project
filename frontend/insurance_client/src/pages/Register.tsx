@@ -1,15 +1,29 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Register() {
+  const location = useLocation();
+  const returnTo = location.state?.returnTo;
+  const navigate = useNavigate();
+
+  const auth = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  if (!auth) return null;
+
+  const { login } = auth;
 
   const handleSubmit = async () => {
     setError("");
@@ -40,10 +54,14 @@ export default function Register() {
         return;
       }
 
+      login(data.user);
+
       setSuccess("Account created successfully!");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+
+      navigate(returnTo || "/");
     } catch {
       setError("Network error");
     }
