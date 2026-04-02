@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -79,6 +80,11 @@ export default function Register() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
+
+      <p style={{ marginTop: "12px" }}>
+        Already have an account?{" "}
+        <Link to="/login">Login here</Link>
+      </p>
     </div>
   );
 }

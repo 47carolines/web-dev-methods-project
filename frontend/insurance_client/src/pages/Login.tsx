@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -76,6 +77,11 @@ export default function Login() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
+      
+      <p style={{ marginTop: "12px" }}>
+        Dont have an account?{" "}
+        <Link to="/register">Register here</Link>
+      </p>
     </div>
   );
 }
