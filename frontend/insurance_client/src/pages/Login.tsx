@@ -56,7 +56,7 @@ export default function Login() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>Login</h2>
+      <h1>Login</h1>
 
       <input
         placeholder="Email"
@@ -77,7 +77,7 @@ export default function Login() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
-      
+
       <p style={{ marginTop: "12px" }}>
         Dont have an account?{" "}
         <Link to="/register">Register here</Link>

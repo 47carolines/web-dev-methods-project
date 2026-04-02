@@ -1,5 +1,8 @@
 import { useState } from "react";
 import type { WizardFormData } from "../../../types/wizard";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
 
 interface Props {
   formData: WizardFormData;
@@ -11,6 +14,10 @@ interface Props {
 export default function FinalDetailsStep({ formData, updateData, nextStep, prevStep }: Props) {
   const { personal, vehicle, driver, final } = formData;
   const [agreed, setAgreed] = useState(final.agreeTerms || false);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+  const user = auth?.user;
 
   const handleAgreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
@@ -24,6 +31,12 @@ export default function FinalDetailsStep({ formData, updateData, nextStep, prevS
       alert("You must agree to the terms to continue.");
       return;
     }
+
+    if (!user) {
+      setShowAuthGate(true);
+      return;
+    }
+
     nextStep();
   };
 
@@ -42,7 +55,89 @@ export default function FinalDetailsStep({ formData, updateData, nextStep, prevS
     return date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
   };
 
-  return (
+  return <>
+    {showAuthGate && (
+      <div style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: "rgba(0,0,0,0.6)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9999
+      }}>
+        <div style={{
+          background: "white",
+          padding: "24px",
+          borderRadius: "10px",
+          width: "90%",
+          maxWidth: "400px",
+          textAlign: "center"
+        }}>
+          <h3>Save your quote</h3>
+          <p>
+            Create an account or log in to view your personalized insurance quote.
+          </p>
+
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            marginTop: "20px"
+          }}>
+            
+    <button
+      onClick={() => navigate("/register")}
+      style={{
+        padding: "12px",
+        borderRadius: "8px",
+        border: "none",
+        backgroundColor: "#2563eb",
+        color: "white",
+        fontWeight: 600,
+        cursor: "pointer"
+      }}
+    >
+      Create Account
+    </button>
+
+    <button
+      onClick={() => navigate("/login")}
+      style={{
+        padding: "12px",
+        borderRadius: "8px",
+        border: "1px solid #ccc",
+        backgroundColor: "white",
+        color: "#333",
+        fontWeight: 500,
+        cursor: "pointer"
+      }}
+    >
+      I already have an account
+    </button>
+
+    <button
+      onClick={() => setShowAuthGate(false)}
+      style={{
+        padding: "10px",
+        borderRadius: "8px",
+        border: "none",
+        backgroundColor: "#f3f4f6",
+        color: "#6b7280",
+        cursor: "pointer"
+      }}
+    >
+      Not now
+    </button>
+
+  </div>
+        </div>
+      </div>
+    )}
+
     <div style={{ maxWidth: "600px" }}>
       <h2>Review Your Quote</h2>
       <p>Check your information before generating your quote.</p>
@@ -84,5 +179,5 @@ export default function FinalDetailsStep({ formData, updateData, nextStep, prevS
         <button onClick={handleConfirm}>Confirm & Get Quote</button>
       </div>
     </div>
-  );
+  </>;
 }
