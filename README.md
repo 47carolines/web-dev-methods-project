@@ -30,7 +30,8 @@ VITE_API_URL=http://127.0.0.1:3000
 3. cp .env.example .env
 4. rails db:create
 5. rails db:migrate
-6. rails server
+6. rails db:seed
+7. rails server
 
 ## URL
 http://localhost:3000
